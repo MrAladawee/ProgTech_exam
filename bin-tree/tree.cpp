@@ -43,3 +43,42 @@ void showTree(tree* root, int level) {
     if (root->right != nullptr) { showTree(root->right, level--); }
 
 }
+
+bool find_in_tree(tree* root, string find_word) { 
+
+    if (!root) { return false; } 
+    
+    if (root->word == find_word) { 
+        cout << find_word << " (" << root->count << ") lvl:" << root->lvl << endl; 
+        return true; 
+
+    } 
+
+    if (root->word > find_word) { 
+        if (root->left == nullptr) { 
+            cout << "not_found"<<endl; 
+            return false; 
+        } 
+
+        else { return find_in_tree(root->left, find_word); } 
+    } 
+
+    if (root->word < find_word) { 
+        if (root->right == nullptr) { 
+            cout << "not_found" << endl; 
+            return false; 
+        } 
+
+        else { return find_in_tree(root->right, find_word); } 
+    } 
+}
+
+void clearTree(tree* node){
+    if(node != NULL){
+        if(node->left != NULL)
+            clearTree(node->left);
+        if(node->right != NULL)
+            clearTree(node->right);
+        delete node;
+    }
+}
